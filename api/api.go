@@ -20,10 +20,11 @@ const (
 	RIGHT Direction = "right"
 	DOWN  Direction = "down"
 	LEFT  Direction = "left"
+	NONE  Direction = "none"
 )
 
 // DirectionChoices that a snake can go
-var DirectionChoices = []Direction{UP, RIGHT, DOWN, LEFT}
+var DirectionChoices = []Direction{UP, RIGHT, DOWN, LEFT, NONE}
 
 // Snake thing
 type Snake struct {
