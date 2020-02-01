@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/battlesnakeio/starter-snake-go/api"
+	"github.com/zacpez/scape-goat/api"
 )
 
 // Index thing
@@ -23,7 +23,7 @@ func Start(res http.ResponseWriter, req *http.Request) {
 	dump(decoded)
 
 	respond(res, api.StartResponse{
-		Color: "#75CEDD",
+		Color: "#69604D",
 	})
 }
 
@@ -34,10 +34,10 @@ func Move(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
 	}
-	dump(decoded)
+	direction = ComputeDirection(&decoded.You)
 
 	respond(res, api.MoveResponse{
-		Move: "down",
+		Move: direction,
 	})
 }
 
