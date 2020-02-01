@@ -1,4 +1,4 @@
-module github.com/battlesnakeio/starter-snake-go
+module github.com/zacpez/scape-goat
 
 go 1.12
 

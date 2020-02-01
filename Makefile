@@ -4,7 +4,7 @@ get:
 .PHONY: get
 
 install:
-	go install github.com/battlesnakeio/starter-snake-go
+	go install github.com/zacpez/scape-goat
 .PHONY: install
 
 run: install
