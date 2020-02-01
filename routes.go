@@ -34,10 +34,10 @@ func Move(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
 	}
-	direction = ComputeDirection(&decoded.You)
+	var direction = ComputeDirection(&decoded.You)
 
 	respond(res, api.MoveResponse{
-		Move: direction,
+		Move: string(direction),
 	})
 }
 
