@@ -11,6 +11,20 @@ type Coord struct {
 	Y int `json:"y"`
 }
 
+// Direction thing
+type Direction string
+
+// Directions such as UP
+const (
+	UP    Direction = "up"
+	RIGHT Direction = "right"
+	DOWN  Direction = "down"
+	LEFT  Direction = "left"
+)
+
+// DirectionChoices that a snake can go
+var DirectionChoices = []Direction{UP, RIGHT, DOWN, LEFT}
+
 // Snake thing
 type Snake struct {
 	ID     string  `json:"id"`
