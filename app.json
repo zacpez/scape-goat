@@ -1,0 +1,14 @@
+{
+  "name": "scape-goat",
+  "description": "A battle snake that has be deploy on the wrongdoings pipeline",
+  "keywords": [
+    "battlesnake",
+    "go",
+    "bot"
+  ],
+  "website": "https://zacpez.com",
+  "repository": "https://github.com/zacpez/scape-goat",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
+  }
+}
