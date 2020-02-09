@@ -27,13 +27,13 @@ func EdgeDirection(snake *api.Snake, boardWidth int, boardHeight int) api.Direct
 	if snake.Body[0].X == 0 {
 		return api.LEFT
 	}
-	if snake.Body[0].X == boardWidth {
+	if snake.Body[0].X == boardWidth-1 {
 		return api.RIGHT
 	}
 	if snake.Body[0].Y == 0 {
 		return api.UP
 	}
-	if snake.Body[0].Y == boardHeight {
+	if snake.Body[0].Y == boardHeight-1 {
 		return api.DOWN
 	}
 	return api.NONE
