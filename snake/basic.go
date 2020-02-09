@@ -55,6 +55,33 @@ func NeckDirection(snake *api.Snake) api.Direction {
 	return api.UP
 }
 
+// SimpleAvoidance is just a one level check for obsticales
+func SimpleAvoidance(snake *api.Snake, board *api.Board, direction *api.Direction) api.Direction {
+	var dx = snake.Body[0].X
+	var dy = snake.Body[0].Y
+	if *direction == api.DOWN {
+		dy = snake.Body[0].Y + 1
+	}
+	if *direction == api.UP {
+		dy = snake.Body[0].Y - 1
+	}
+	if *direction == api.LEFT {
+		dy = snake.Body[0].Y - 1
+	}
+	if *direction == api.RIGHT {
+		dy = snake.Body[0].Y + 1
+	}
+
+	for _, other := range board.Snakes {
+		for _, part := range other.Body {
+			if part.X == dx || part.Y == dy {
+				return *direction
+			}
+		}
+	}
+	return api.NONE
+}
+
 // SimpleRandomChoice gets an index given maxChoice indexes
 func SimpleRandomChoice(maxChoice int) int {
 	return (int(time.Now().UnixNano()) % maxChoice)

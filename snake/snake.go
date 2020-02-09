@@ -33,27 +33,11 @@ func DumbDirections(respone chan<- []api.Direction, snake *api.Snake, board *api
 
 // PredictNextDirection returns bad decissions
 func PredictNextDirection(badies chan<- api.Direction, wg *sync.WaitGroup, snake *api.Snake, board *api.Board, direction *api.Direction) {
-	var dx = snake.Body[0].X
-	var dy = snake.Body[0].Y
-	if *direction == api.DOWN {
-		dy = snake.Body[0].Y + 1
-	}
-	if *direction == api.UP {
-		dy = snake.Body[0].Y - 1
-	}
-	if *direction == api.LEFT {
-		dy = snake.Body[0].Y - 1
-	}
-	if *direction == api.RIGHT {
-		dy = snake.Body[0].Y + 1
-	}
 
-	for _, other := range board.Snakes {
-		for _, part := range other.Body {
-			if part.X == dx || part.Y == dy {
-				badies <- *direction
-			}
-		}
+	if snake.Health <= 75 {
+		badies <- FindFoodDirection(snake, board, direction)
+	} else {
+		badies <- SimpleAvoidance(snake, board, direction)
 	}
 
 	wg.Done()
