@@ -59,27 +59,6 @@ func PredictNextDirection(badies chan<- api.Direction, wg *sync.WaitGroup, snake
 	wg.Done()
 }
 
-// Difference of two Sets: A - B
-func Difference(a []api.Direction, b []api.Direction) (diff []api.Direction) {
-	m := make(map[api.Direction]bool)
-
-	for _, item := range b {
-		m[item] = true
-	}
-
-	for _, item := range a {
-		if _, ok := m[item]; !ok {
-			diff = append(diff, item)
-		}
-	}
-	return
-}
-
-// SimpleRandomChoice gets an index given maxChoice indexes
-func SimpleRandomChoice(maxChoice int) int {
-	return (int(time.Now().UnixNano()) % maxChoice)
-}
-
 // ComputeDirection thing
 func ComputeDirection(snake *api.Snake, board *api.Board) api.Direction {
 	// Quickly find the worst options
