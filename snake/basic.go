@@ -66,15 +66,15 @@ func SimpleAvoidance(snake *api.Snake, board *api.Board, direction *api.Directio
 		dy = snake.Body[0].Y - 1
 	}
 	if *direction == api.LEFT {
-		dy = snake.Body[0].Y - 1
+		dx = snake.Body[0].X - 1
 	}
 	if *direction == api.RIGHT {
-		dy = snake.Body[0].Y + 1
+		dx = snake.Body[0].X + 1
 	}
 
 	for _, other := range board.Snakes {
 		for _, part := range other.Body {
-			if part.X == dx || part.Y == dy {
+			if part.X == dx && part.Y == dy {
 				return *direction
 			}
 		}
