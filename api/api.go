@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 )
 
 // Coord thing
@@ -16,11 +17,12 @@ type Direction string
 
 // Directions such as UP
 const (
-	UP    Direction = "up"
-	RIGHT Direction = "right"
-	DOWN  Direction = "down"
-	LEFT  Direction = "left"
-	NONE  Direction = "none"
+	UP      Direction     = "up"
+	RIGHT   Direction     = "right"
+	DOWN    Direction     = "down"
+	LEFT    Direction     = "left"
+	NONE    Direction     = "none"
+	TIMEOUT time.Duration = 175
 )
 
 // DirectionChoices that a snake can go

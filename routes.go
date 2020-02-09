@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/zacpez/scape-goat/api"
+	"github.com/zacpez/scape-goat/snake"
 )
 
 // Index thing
@@ -34,7 +35,7 @@ func Move(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
 	}
-	var direction = ComputeDirection(&decoded.You, &decoded.Board)
+	var direction = snake.ComputeDirection(&decoded.You, &decoded.Board)
 
 	respond(res, api.MoveResponse{
 		Move: string(direction),
