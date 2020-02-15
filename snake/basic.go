@@ -23,20 +23,21 @@ func Difference(a []api.Direction, b []api.Direction) (diff []api.Direction) {
 }
 
 // EdgeDirection finds a Direction if next to the edge, otherwise api.NONE
-func EdgeDirection(snake *api.Snake, boardWidth int, boardHeight int) api.Direction {
+func EdgeDirection(snake *api.Snake, boardWidth int, boardHeight int) []api.Direction {
+	var edges = []api.Direction{}
 	if snake.Body[0].X == 0 {
-		return api.LEFT
+		edges = append(edges, api.LEFT)
 	}
 	if snake.Body[0].X == boardWidth-1 {
-		return api.RIGHT
+		edges = append(edges, api.RIGHT)
 	}
 	if snake.Body[0].Y == 0 {
-		return api.UP
+		edges = append(edges, api.UP)
 	}
 	if snake.Body[0].Y == boardHeight-1 {
-		return api.DOWN
+		edges = append(edges, api.DOWN)
 	}
-	return api.NONE
+	return edges
 }
 
 // NeckDirection finds the neck of a api.Snake
@@ -60,16 +61,16 @@ func SimpleAvoidance(snake *api.Snake, board *api.Board, direction *api.Directio
 	var dx = snake.Body[0].X
 	var dy = snake.Body[0].Y
 	if *direction == api.DOWN {
-		dy = snake.Body[0].Y + 1
+		dy = dy + 1
 	}
 	if *direction == api.UP {
-		dy = snake.Body[0].Y - 1
+		dy = dy - 1
 	}
 	if *direction == api.LEFT {
-		dx = snake.Body[0].X - 1
+		dx = dx - 1
 	}
 	if *direction == api.RIGHT {
-		dx = snake.Body[0].X + 1
+		dx = dx + 1
 	}
 
 	for _, other := range board.Snakes {

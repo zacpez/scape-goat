@@ -15,10 +15,10 @@ func respond(res http.ResponseWriter, obj interface{}) {
 }
 
 func dump(obj interface{}) {
-	data, err := json.MarshalIndent(obj, "", "  ")
-	if err == nil {
-		log.Printf(string(data))
-	}
+	//data, err := json.MarshalIndent(obj, "", "  ")
+	//if err == nil {
+	//log.Printf(string(data))
+	//}
 }
 
 // LogFormat thing

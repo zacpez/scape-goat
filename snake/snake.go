@@ -7,6 +7,10 @@ import (
 	"github.com/zacpez/scape-goat/api"
 )
 
+const (
+	HUNGER = 75
+)
+
 // DumbDirections finds a []Direction to exclude from choices
 func DumbDirections(respone chan<- []api.Direction, snake *api.Snake, board *api.Board, directions *[]api.Direction) []api.Direction {
 	var dumbIdeas = []api.Direction{}
@@ -34,7 +38,7 @@ func DumbDirections(respone chan<- []api.Direction, snake *api.Snake, board *api
 // PredictNextDirection returns bad decissions
 func PredictNextDirection(badies chan<- api.Direction, wg *sync.WaitGroup, snake *api.Snake, board *api.Board, direction *api.Direction) {
 
-	if snake.Health <= 75 {
+	if snake.Health <= HUNGER {
 		badies <- FindFoodDirection(snake, board, direction)
 	} else {
 		badies <- SimpleAvoidance(snake, board, direction)
@@ -46,10 +50,10 @@ func PredictNextDirection(badies chan<- api.Direction, wg *sync.WaitGroup, snake
 // ComputeDirection thing
 func ComputeDirection(snake *api.Snake, board *api.Board) api.Direction {
 	// Quickly find the worst options
-	var excludeChoices = []api.Direction{
-		NeckDirection(snake),
-		EdgeDirection(snake, board.Width, board.Height),
-		api.NONE}
+	var excludeChoices = EdgeDirection(snake, board.Width, board.Height)
+	excludeChoices = append(excludeChoices, NeckDirection(snake))
+	excludeChoices = append(excludeChoices, api.NONE)
+	//log.Println(snake.ID, "exclude", excludeChoices)
 	var choices = Difference(api.DirectionChoices, excludeChoices)
 
 	// Find more logical directions
@@ -64,6 +68,8 @@ func ComputeDirection(snake *api.Snake, board *api.Board) api.Direction {
 	}
 
 	var choiceCount = len(choices)
+	//log.Println(snake.ID, snake.Body[0])
+	//log.Println(snake.ID, "final", choices)
 	// One choice left
 	if choiceCount == 1 {
 		return choices[0]
